@@ -1,0 +1,13 @@
+#+TITLE: Take-Out System
+* Table of Contents                                       :TOC_4_gh:noexport:
+- [[#introduction][Introduction]]
+  - [[#user][User]]
+    - [[#custom][Custom]]
+    - [[#shop][Shop]]
+    - [[#manager][Manager]]
+
+* Introduction
+** User
+*** Custom
+*** Shop
+*** Manager
