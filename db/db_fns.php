@@ -24,5 +24,35 @@ function db_result_to_array($result)
     return $res_result;
 }
 
-?>
 
+function phpval_to_sqlval($value)
+{
+    return $value;
+
+    // if($value == true) {
+    //     return 1;
+    // } else if($value == false) {
+    //     return 0;
+    // } else if(is_array($value)) {
+    //     return array_map("phpval_to_sqlval", $value);
+    // } else {
+    //     return value;
+    // }
+}
+
+function sqlval_to_phpval($value)
+{
+    return $value;
+
+    // if($value == 1) {
+    //     return true;
+    // } else if($value == 0) {
+    //     return false;
+    // } else if(is_array($value)) {
+    //     return array_map("phpval_to_sqlval", $value);
+    // } else {
+    //     return value;
+    // }
+}
+
+?>
