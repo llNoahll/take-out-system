@@ -1,7 +1,7 @@
 <?php
 
-require_once("../../db/db_fns.php");
-require_once("../class.php");
+// require_once("../../db/db_fns.php");
+// require_once("../class.php");
 
 
 function db_insert_shop($shop)
@@ -28,7 +28,7 @@ function db_insert_shop($shop)
               values ('$login_name', '$login_pwd',
                       '$sid', '$boss_name', '$shop_name',
                       '$phone', '$email', '$address',
-                      '$isrecommend');";
+                      $isrecommend);";
     $result = $conn->query($query);
     if ($result == false) {
         return false;

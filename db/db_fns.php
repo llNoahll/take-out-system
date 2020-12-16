@@ -3,12 +3,12 @@
 function db_connect()
 {
     // server, login_name, login_pwd, db_name
-    $result = new mysqli('localhost', 'lzu_takeout_system', 'password', 'takeout_system');
-    if ($result == false) {
-        return false;
-    } else {
-        return $result;
+    try {
+        $conn = new mysqli('localhost', 'lzu_takeout_system', 'password', 'take_out_db');
+    } catch (Exception $ex) {
+        die("数据库连接失败");
     }
+    return $conn;
 }
 
 function db_result_to_array($result)

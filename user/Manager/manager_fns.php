@@ -1,7 +1,7 @@
 <?php
 
-require_once("../../db/db_fns.php");
-require_once("../class.php");
+// require_once("../../db/db_fns.php");
+// require_once("../class.php");
 
 
 function db_insert_manager($manager)

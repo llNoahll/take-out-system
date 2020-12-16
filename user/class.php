@@ -1,6 +1,6 @@
 <?php
 
-require_once("../db/db_fns.php");
+// require_once("../db/db_fns.php");
 
 
 class User
@@ -26,7 +26,7 @@ function is_signup($table_name, $login_name)
     $conn = db_connect();
 
     $query = "select *
-              from '$table_name'
+              from `$table_name`
               where login_name = '$login_name';";
     $result = $conn->query($query);
     if ($result == false || $result->num_rows == 0) {
@@ -41,7 +41,7 @@ function get_user_row($table_name, $login_name, $login_pwd)
     $conn = db_connect();
 
     $query = "select *
-              from '$table_name'
+              from `$table_name`
               where login_name = '$login_name' and login_pwd = '$login_pwd';";
     $result = $conn->query($query);
     if ($result == false || $result->num_rows == 0) {
@@ -92,6 +92,7 @@ class Customer extends User
         $value = phpval_to_sqlval($value);
 
         $conn = db_connect();
+
         $query = "update Customer set '$key' = '$value' where cid = '$this->cid';";
         $result = $conn->query($query);
         if ($result == false) {
@@ -253,6 +254,7 @@ class Shop extends User
         $value = phpval_to_sqlval($value);
 
         $conn = db_connect();
+
         $query = "update Shop set '$key' = '$value' where sid = '$this->sid';";
         $result = $conn->query($query);
         if ($result == false) {
@@ -358,6 +360,7 @@ class Manager extends User
         $value = phpval_to_sqlval($value);
 
         $conn = db_connect();
+
         $query = "update Manager set '$key' = '$value' where mid = '$this->mid';";
         $result = $conn->query($query);
         if ($result == false) {

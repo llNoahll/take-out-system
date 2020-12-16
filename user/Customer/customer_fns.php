@@ -1,7 +1,7 @@
 <?php
 
-require_once("../../db/db_fns.php");
-require_once("../class.php");
+// require_once("../../db/db_fns.php");
+// require_once("../class.php");
 
 
 function db_insert_customer($customer)
@@ -25,7 +25,7 @@ function db_insert_customer($customer)
                                     sex, age, qq, phone,
                                     nickname, realname, address, email)
               values ('$login_name', '$login_pwd', '$pay_pwd', '$cid',
-                      '$sex', '$age', '$qq', '$phone',
+                      '$sex', $age, '$qq', '$phone',
                       '$nickname', '$realname', '$address', '$email');";
     $result = $conn->query($query);
     if ($result == false) {
@@ -71,6 +71,7 @@ function login_customer($login_name, $login_pwd)
 
     $login_name = $row["login_name"];
     $login_pwd = $row["login_pwd"];
+    $pay_pwd = $row["pay_pwd"];
     $cid = $row["cid"];
     $sex = $row["sex"];
     $age = $row["age"];

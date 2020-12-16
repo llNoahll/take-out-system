@@ -56,5 +56,4 @@ function cancel_order($obj, $order)
     }
 }
 
-
 ?>
