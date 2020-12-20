@@ -6,6 +6,11 @@
 
 function db_insert_customer($customer)
 {
+    if(($customer instanceof Customer) === false) {return false;}
+
+    $login_name = $customer->get_login_name();
+    if(db_is_signup("Customer", $login_name)) {return false;}
+
     $login_pwd = $customer->get_login_pwd();
     $pay_pwd = $customer->get_pay_pwd();
     $cid = $customer->get_cid();
@@ -28,7 +33,7 @@ function db_insert_customer($customer)
                       '$sex', $age, '$qq', '$phone',
                       '$nickname', '$realname', '$address', '$email');";
     $result = $conn->query($query);
-    if ($result == false) {
+    if ($result === false) {
         return false;
     } else {
         return true;
@@ -38,7 +43,7 @@ function db_insert_customer($customer)
 function signup_customer()
 {
     $login_name = $_POST["login_name"];
-    if(is_signup("Customer", $login_name)) {return false;}
+    if(db_is_signup("Customer", $login_name)) {return false;}
 
     $login_pwd = $_POST["login_pwd"];
     $pay_pwd = $_POST["pay_pwd"];
@@ -65,8 +70,8 @@ function signup_customer()
 
 function login_customer($login_name, $login_pwd)
 {
-    $row = get_user_row("Customer", $login_name, $login_pwd);
-    if ($row == false) {return false;}
+    $row = db_get_user_row("Customer", $login_name, $login_pwd);
+    if ($row === false) {return false;}
 
 
     $login_name = $row["login_name"];

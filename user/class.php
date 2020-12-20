@@ -21,7 +21,7 @@ class User
     public function set_login_pwd($new_pwd) {$this->login_pwd = $new_pwd;}
 }
 
-function is_signup($table_name, $login_name)
+function db_is_signup($table_name, $login_name)
 {
     $conn = db_connect();
 
@@ -29,14 +29,14 @@ function is_signup($table_name, $login_name)
               from `$table_name`
               where login_name = '$login_name';";
     $result = $conn->query($query);
-    if ($result == false || $result->num_rows == 0) {
+    if ($result === false || $result->num_rows === 0) {
         return false;
     } else {
         return true;
     }
 }
 
-function get_user_row($table_name, $login_name, $login_pwd)
+function db_get_user_row($table_name, $login_name, $login_pwd)
 {
     $conn = db_connect();
 
@@ -44,7 +44,7 @@ function get_user_row($table_name, $login_name, $login_pwd)
               from `$table_name`
               where login_name = '$login_name' and login_pwd = '$login_pwd';";
     $result = $conn->query($query);
-    if ($result == false || $result->num_rows == 0) {
+    if ($result === false || $result->num_rows === 0) {
         return false;
     } else {
         $row = $result->fetch_assoc();
@@ -88,14 +88,14 @@ class Customer extends User
 
     public function db_update_value($key, $value)
     {
-        if($key == "login_name" || $key == "cid") {return false;}
+        if($key === "login_name" || $key === "cid") {return false;}
         $value = phpval_to_sqlval($value);
 
         $conn = db_connect();
 
         $query = "update Customer set '$key' = '$value' where cid = '$this->cid';";
         $result = $conn->query($query);
-        if ($result == false) {
+        if ($result === false) {
             return false;
         } else {
             return true;
@@ -104,7 +104,7 @@ class Customer extends User
 
     public function set_login_pwd($new_login_pwd)
     {
-        if (db_update_value("login_pwd", $new_pwd) == false) {
+        if (db_update_value("login_pwd", $new_pwd) === false) {
             return false;
         } else {
             $this->login_pwd = $new_pwd;
@@ -114,7 +114,7 @@ class Customer extends User
 
     public function set_pay_pwd($new_pay_pwd)
     {
-        if (db_update_value("pay_pwd", $new_pay_pwd) == false) {
+        if (db_update_value("pay_pwd", $new_pay_pwd) === false) {
             return false;
         } else {
             $this->pay_pwd = $new_pay_pwd;
@@ -124,7 +124,7 @@ class Customer extends User
 
     public function set_sex($new_sex)
     {
-        if (db_update_value("sex", $sex) == false) {
+        if (db_update_value("sex", $sex) === false) {
             return false;
         } else {
             $this->sex = $new_sex;
@@ -134,7 +134,7 @@ class Customer extends User
 
     public function set_age($new_age)
     {
-        if (db_update_value("age", $new_age) == false) {
+        if (db_update_value("age", $new_age) === false) {
             return false;
         } else {
             $this->age = $new_age;
@@ -144,7 +144,7 @@ class Customer extends User
 
     public function set_qq($new_qq)
     {
-        if (db_update_value("qq", $new_qq) == false) {
+        if (db_update_value("qq", $new_qq) === false) {
             return false;
         } else {
             $this->qq = $new_qq;
@@ -154,7 +154,7 @@ class Customer extends User
 
     public function set_phone($new_phone)
     {
-        if (db_update_value("phone", $new_phone) == false) {
+        if (db_update_value("phone", $new_phone) === false) {
             return false;
         } else {
             $this->phone = $new_phone;
@@ -164,7 +164,7 @@ class Customer extends User
 
     public function set_nickname($new_nickname)
     {
-        if (db_update_value("nickname", $new_nickname) == false) {
+        if (db_update_value("nickname", $new_nickname) === false) {
             return false;
         } else {
             $this->nickname = $new_nickname;
@@ -174,7 +174,7 @@ class Customer extends User
 
     public function set_realname($new_realname)
     {
-        if (db_update_value("realname", $new_realname) == false) {
+        if (db_update_value("realname", $new_realname) === false) {
             return false;
         } else {
             $this->realname = $new_realname;
@@ -184,7 +184,7 @@ class Customer extends User
 
     public function set_address($new_address)
     {
-        if (db_update_value("address", $new_addres) == false) {
+        if (db_update_value("address", $new_addres) === false) {
             return false;
         } else {
             $this->address = $new_adress;
@@ -194,7 +194,7 @@ class Customer extends User
 
     public function set_email($new_email)
     {
-        if (db_update_value("email", $new_email) == false) {
+        if (db_update_value("email", $new_email) === false) {
             return false;
         } else {
             $this->email = $new_email;
@@ -223,7 +223,7 @@ class Shop extends User
     private $sid;
     private $boss_name;
     private $shop_name;
-    // private $orders;
+    private $foods_msg;
     private $phone;
     private $email;
     private $address;
@@ -240,7 +240,7 @@ class Shop extends User
         $this->sid = $sid;
         $this->boss_name = $boss_name;
         $this->shop_name = $shop_name;
-        /* $this->orders = $orders; */
+        $this->foods_msg = $foods_msg;
         $this->phone = $phone;
         $this->email = $email;
         $this->address = $address;
@@ -250,14 +250,14 @@ class Shop extends User
 
     public function db_update_value($key, $value)
     {
-        if($key == "login_name" || $key == "cid") {return false;}
+        if($key === "login_name" || $key === "cid") {return false;}
         $value = phpval_to_sqlval($value);
 
         $conn = db_connect();
 
         $query = "update Shop set '$key' = '$value' where sid = '$this->sid';";
         $result = $conn->query($query);
-        if ($result == false) {
+        if ($result === false) {
             return false;
         } else {
             return true;
@@ -266,7 +266,7 @@ class Shop extends User
 
     public function set_login_pwd($new_pwd)
     {
-        if (db_update_value("login_pwd", $new_pwd) == false) {
+        if (db_update_value("login_pwd", $new_pwd) === false) {
             return false;
         } else {
             $this->login_pwd = $new_pwd;
@@ -276,7 +276,7 @@ class Shop extends User
 
     public function set_boss_name($new_boss_name)
     {
-        if (db_update_value("boss_name", $new_boss_name) == false) {
+        if (db_update_value("boss_name", $new_boss_name) === false) {
             return false;
         } else {
             $this->boss_name = $new_boss_name;
@@ -286,7 +286,17 @@ class Shop extends User
 
     public function set_shop_name($new_shop_name)
     {
-        if (db_update_value("shop_name", $new_shop_name) == false) {
+        if (db_update_value("shop_name", $new_shop_name) === false) {
+            return false;
+        } else {
+            $this->shop_name = $new_shop_name;
+            return true;
+        }
+    }
+
+    public function set_foods_msg($new_foods_msg)
+    {
+        if (db_update_value("foods_msg", addslashes(json_encode($new_foods_msg))) === false) {
             return false;
         } else {
             $this->shop_name = $new_shop_name;
@@ -296,7 +306,7 @@ class Shop extends User
 
     public function set_phone($new_phone)
     {
-        if (db_update_value("phone", $new_phone) == false) {
+        if (db_update_value("phone", $new_phone) === false) {
             return false;
         } else {
             $this->phone = $new_phone;
@@ -306,7 +316,7 @@ class Shop extends User
 
     public function set_email($new_email)
     {
-        if (db_update_value("email", $new_email) == false) {
+        if (db_update_value("email", $new_email) === false) {
             return false;
         } else {
             $this->email = $new_email;
@@ -316,7 +326,7 @@ class Shop extends User
 
     public function set_address($new_address)
     {
-        if (db_update_value("address", $new_address) == false) {
+        if (db_update_value("address", $new_address) === false) {
             return false;
         } else {
             $this->address = $new_address;
@@ -330,10 +340,31 @@ class Shop extends User
     public function get_sid() {return $this->sid;}
     public function get_boss_name() {return $this->boss_name;}
     public function get_shop_name() {return $this->shop_name;}
-    /* public function get_orders() {return $this->orders;} */
+    public function get_foods_msg() {return $this->foods_msg;}
     public function get_phone() {return $this->phone;}
     public function get_email() {return $this->email;}
     public function get_address() {return $this->address;}
+
+    public function get_food_msg($id)
+    {
+        foreach($foods_msg as $fid => $food_msg) {
+            if($id === $fid) {return $food_msg;}
+        }
+        return false;
+    }
+
+
+    public function add_food($fname, $price, $brief, $img_path)
+    {
+        $fid = md5(uniqid());
+        $this->foods_msg[$fid] = ["fid" => $fid,
+                                  "fname" => $fname,
+                                  "price" => $price,
+                                  "brief" => $brief,
+                                  "img_path" => $img_path];
+        $this->set_foods_msg($this->foods_msg);
+    }
+
 }
 
 class Manager extends User
@@ -356,14 +387,14 @@ class Manager extends User
 
     public function db_update_value($key, $value)
     {
-        if($key == "login_name" || $key == "mid") {return false;}
+        if($key === "login_name" || $key === "mid") {return false;}
         $value = phpval_to_sqlval($value);
 
         $conn = db_connect();
 
         $query = "update Manager set '$key' = '$value' where mid = '$this->mid';";
         $result = $conn->query($query);
-        if ($result == false) {
+        if ($result === false) {
             return false;
         } else {
             return true;
@@ -372,7 +403,7 @@ class Manager extends User
 
     public function set_login_pwd($new_login_pwd)
     {
-        if (db_update_value("login_pwd", $new_pwd) == false) {
+        if (db_update_value("login_pwd", $new_pwd) === false) {
             return false;
         } else {
             $this->login_pwd = $new_pwd;
@@ -382,7 +413,7 @@ class Manager extends User
 
     public function set_nickname($new_nickname)
     {
-        if (db_update_value("nickname", $new_nickname) == false) {
+        if (db_update_value("nickname", $new_nickname) === false) {
             return false;
         } else {
             $this->login_nickname = $new_nickname;
