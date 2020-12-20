@@ -49,5 +49,8 @@ CREATE TABLE `Order` (
   `order_state` char(20) NOT NULL,
   `address` varchar(100) NOT NULL,
   `order_food` JSON DEFAULT NULL,
-  `total_price` float NOT NULL
+  `total_price` float NOT NULL,
+
+  foreign key (sid) REFERENCES Shop(sid),
+  foreign key (cid) REFERENCES Customer(cid)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
